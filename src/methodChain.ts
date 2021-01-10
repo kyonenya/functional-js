@@ -1,3 +1,4 @@
+{
 /**
  * メソッドチェーンをクロージャで実装
  * @url https://mnivore.com/blogs/archives/49
@@ -25,3 +26,4 @@ const result = simpleCalc
   .val(); // 遅延実行
   
 console.log(result); // -> 12
+}
