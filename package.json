@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "tsc": "tsc -w",
-    "1 node": "node dist/3-4_methodChain.js"
+    "1 node": "node dist/curry.js"
   },
   "dependencies": {
     "@types/node": "^14.14.20",
