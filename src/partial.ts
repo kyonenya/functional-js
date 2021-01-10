@@ -23,8 +23,7 @@ const partial2 = (fn: Function, ...args: unknown[]) => {
 /** apply any number of arguments */
 const partial = (fn: Function, ...args: unknown[]) => {
   return args.reduce((acc: Function, arg) => {
-    acc = acc.bind(undefined, arg);
-    return acc;
+    return acc.bind(undefined, arg);
   }, fn);
 };
 
