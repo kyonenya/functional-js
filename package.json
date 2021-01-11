@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "tsc": "tsc -w",
-    "compose": "node dist/compose.js",
+    "functor": "node dist/functor.js",
     "pipe": "node dist/pipe.js"
   },
   "dependencies": {
