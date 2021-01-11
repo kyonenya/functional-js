@@ -10,8 +10,13 @@ class Wrapper {
     this._value = value;
   }
   
+  /** 
+   * map: Does not wrap, simply return lifted value.
+   */
   public  map = (fn: Function) => fn(this._value);
-  
+  /**
+   * functor: Open container, lift value & apply function, then wrap by container again.
+   */
   public fmap = (fn: Function) => wrap(fn(this._value));
 }
 
@@ -22,7 +27,8 @@ const wrappedVal = wrap('Get Functional');
 wrappedVal.map((x: string) => console.log(x)); // -> 'Get Functional'
 wrappedVal.map(identity); // = 'Get Functional'
 
-/** fmap */
+//                       ↑returns value  ↓returns Function
+
 wrappedVal.fmap(identity); // -> [Function] = wrap('Get Functional')
 wrappedVal
   .fmap((x: string) => x.toUpperCase()) // = wrap('GET FUNCTIONAL')
