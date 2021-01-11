@@ -12,8 +12,9 @@ class Wrapper {
   public fmap = (fn: Function) => wrap(fn(this._value));
 }
 
-const compose2 = (fn1: Function, fn2: Function) => {
-  return (x: unknown) => fn1(fn2(x));
+const compose = (..._fns: any[]) => {
+  const fns = [..._fns];
+  return <T>(x: T) => fns.reverse().reduce((acc, fn) => fn(acc), x);
 };
 
 /**
@@ -28,20 +29,29 @@ const findStudent = (ids: { [k: string]: number }) => {
 findStudent(idsRepo)('Catherine') // Wrapper(3)
   .map((x:unknown) => x); // = 3
 
-const getAddress = (wrappedId: Wrapper) => {
+const getAddress = (id: number) => {
   const addresses = [2260002, 1660004, 4960947];
-  const id = wrappedId.map(R.identity);
-  const address = addresses[id];
-  return wrap(
-    wrap(address)
-  );
+  return wrap(addresses[id - 1]);
 };
+getAddress(3)
+  .map((x:unknown) => x); // = 4960947
 
-const studentAddress = compose2(
+const then = (wrapped: Wrapper) => wrapped.map(R.identity);
+
+/**
+ * functorの限界
+ * - Wrapを剥がして値をLiftする関数を挟まないと関数合成ができない
+ * - あるいは合成するたびに新たにWrapされた値が返り、
+ *   何回もLiftしないと値が取り出せない。
+ */
+const studentAddress: (name: string) => Wrapper = R.compose(
   getAddress,
-  findStudent(idsRepo)
+  then, // Promise<value> => value
+  findStudent(idsRepo),
 );
-l = studentAddress('Bob'); // = Wrapper(Wrapper(1660004))
+
+studentAddress('Bob')
+  .map(R.tap(console.log)); // -> 1660004
 
 console.log(l);
 }
