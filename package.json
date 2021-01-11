@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "tsc": "tsc -w",
-    "functor": "node dist/functor.js",
-    "NextedFunctor": "node dist/functorNested.js"
+    "monadError": "node dist/monadError.js",
+    "nestedFunctor": "node dist/functorNested.js"
   },
   "dependencies": {
     "@types/node": "^14.14.20",
