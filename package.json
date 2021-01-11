@@ -4,7 +4,7 @@
   "scripts": {
     "tsc": "tsc -w",
     "functor": "node dist/functor.js",
-    "combinator": "node dist/combinator.js"
+    "NextedFunctor": "node dist/functorNested.js"
   },
   "dependencies": {
     "@types/node": "^14.14.20",
