@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "tsc": "tsc -w",
-    "monadWrapperEx": "node dist/monadWrapperEx.js",
+    "maybe": "node dist/maybe.js",
     "nestedFunctor": "node dist/functorNested.js"
   },
   "dependencies": {
