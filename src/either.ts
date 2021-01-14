@@ -1,6 +1,6 @@
 import * as R from 'ramda';
 {
-let l;
+let l: any = 'End';
 
 type f<T, U> =(x: T) => U;
 //type Either<T> = Left<T>|Right<T>;
@@ -33,6 +33,8 @@ class Right<T> implements Either<T> {
 
 /** 
  * Maybe-like Either (Safe execution)
+ * getOrElse: defalt value if error
+ * orElse: try-catch
  */
 const ofEither = <T>(a: T) => (a !== null && a !== undefined)
   ? new Right(a)
@@ -44,15 +46,34 @@ const selectById = (ids: { [k: string]: number }) => {
 };
 const safeFindId: (name: string) => Either<number> = selectById(idsDb);
 
+/** safe get value (getOrElse) */
+safeFindId('Takashi')
+//  .value; // -> Uncaught TypeError: Can not extract the value of Left
+  .getOrElse(0); // = 0 | 1-3
+
+/** try-catch (orElse) */
+// Left
+safeFindId('Takashi') // = Left(undefined)
+  .orElse(R.tap(console.error)) // -> undefined
+// Right
 safeFindId('Catherine') // = Right(3)
   .orElse(R.tap(console.log)) // (skipped)
   .map(R.tap(console.log)); // -> 3
-//safeFindId('Takashi')
-//  .value; // -> Uncaught TypeError: Can not extract the value of Left
-safeFindId('Takashi')
-  .orElse(R.tap(console.log)); // -> undefined
 
+/** throw error capsul */
+const decode = (url: string) => {
+  try {
+    const result = decodeURIComponent(url);
+    return ofRight(result);
+  } catch (err) {
+    return ofLeft(err);
+  }
+};
+const encode = (url: string) => encodeURIComponent(url);
 
+decode('valid%3Fid%3D').map(encode); // Right('valid%3Fid%3D')
+decode('invalid3s%%F%').map(encode); // Left(URIError: ...)
+  // does not stop execution until the capsul is opened
 
 console.log(l);
 }
