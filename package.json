@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "tsc": "tsc -w",
-    "maybe": "node dist/maybe.js",
+    "fs": "node dist/fs.js",
     "either": "node dist/either.js"
   },
   "dependencies": {

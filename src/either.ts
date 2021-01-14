@@ -60,7 +60,7 @@ safeFindId('Catherine') // = Right(3)
   .orElse(R.tap(console.log)) // (skipped)
   .map(R.tap(console.log)); // -> 3
 
-/** throw error capsul */
+/** throw error capsule */
 const decode = (url: string) => {
   try {
     const result = decodeURIComponent(url);
@@ -73,7 +73,7 @@ const encode = (url: string) => encodeURIComponent(url);
 
 decode('valid%3Fid%3D').map(encode); // Right('valid%3Fid%3D')
 decode('invalid3s%%F%').map(encode); // Left(URIError: ...)
-  // does not stop execution until the capsul is opened
+  // does not stop execution until the capsule is opened
 
 console.log(l);
 }
