@@ -30,8 +30,11 @@ pipe('100')
  * - fork(join)
  */
 const identity = (x: unknown) => x;
-const tap = (fn: Function) => {
-  return (x: unknown) => fn(x);
+const tap = (fn: Function) => {  
+  return (x: unknown) => {
+    fn(x);
+    return x;
+  };
 };
 
 pipe('  200 ')
