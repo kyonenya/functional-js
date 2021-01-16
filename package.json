@@ -4,7 +4,7 @@
   "scripts": {
     "tsc": "tsc -w",
     "IO": "node dist/IO.js",
-    "either": "node dist/either.js"
+    "action": "node dist/action.js"
   },
   "dependencies": {
     "@types/node": "^14.14.20",
