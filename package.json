@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "tsc": "tsc -w",
-    "promiseAll": "node dist/promiseAll.js",
+    "Task": "node dist/Task.js",
     "action": "node dist/action.js"
   },
   "dependencies": {
