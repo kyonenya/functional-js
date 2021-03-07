@@ -1,7 +1,7 @@
-import { Task } from 'fp-ts/lib/Task';
-import { TaskEither, tryCatch, left, right, map, mapLeft } from 'fp-ts/lib/TaskEither';
+import * as T from 'fp-ts/lib/Task';
+import * as TE from 'fp-ts/lib/TaskEither';
 
-const lazyDouble = (x: number): Task<number> => () => Promise.resolve(x * 2);
+const lazyDouble = (x: number): T.Task<number> => () => Promise.resolve(x * 2);
 
 const lazyDoubleThree = lazyDouble(3);
 //lazyDoubleThree().then(console.log); // -> 6
@@ -12,7 +12,7 @@ const lazyDivide = (x: number) => new Promise((resolve, reject) => {
 });
 //lazyDivide(3).then(console.log).catch(console.error);
 
-const either = tryCatch(() => lazyDivide(10), err => `${err}`);
-const either2 = map(console.log)(either);
+const either = TE.tryCatch(() => lazyDivide(10), err => `${err}`);
+const either2 = TE.map(console.log)(either);
 
 either2();
