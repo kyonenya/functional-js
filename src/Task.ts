@@ -14,12 +14,14 @@ const lazyDivide = (x: number) => new Promise((resolve, reject) => {
 });
 //lazyDivide(3).then(console.log).catch(console.error);
 
-const either = TE.tryCatch(() => lazyDivide(10), err => `${err}`);
-const either2 = TE.map(console.log)(either);
+const lazyDivider = TE.tryCatchK((x: number) => lazyDivide(x), (e) => `${e}`);
 
 const main = pipe(
-  TE.tryCatch(() => lazyDivide(10), err => `${err}`),
-  TE.map(console.log),
+  E.right(11),
+  TE.fromEither,
+  TE.chain(lazyDivider),
+//  TE.map(console.log),
+  TE.mapLeft(console.error),
 );
 
 main();
