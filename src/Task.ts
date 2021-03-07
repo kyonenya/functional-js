@@ -1,7 +1,7 @@
 import * as E from 'fp-ts/lib/Either';
 import * as T from 'fp-ts/lib/Task';
 import * as TE from 'fp-ts/lib/TaskEither';
-import { pipe } from 'fp-ts/lib/function';
+import { pipe, flow } from 'fp-ts/lib/function';
 
 const lazyDouble = (x: number): T.Task<number> => () => Promise.resolve(x * 2);
 
@@ -20,8 +20,23 @@ const main = pipe(
   E.right(11),
   TE.fromEither,
   TE.chain(lazyDivider),
-//  TE.map(console.log),
+  TE.map(console.log),
   TE.mapLeft(console.error),
 );
 
-main();
+//main();
+
+const flow1 = flow(
+  (x: number) => E.right(x),
+  TE.fromEither,
+  TE.chain(lazyDivider),
+  TE.map(console.log),
+  TE.mapLeft(console.error),
+);
+
+flow1(12)();
+
+const len = (s: string): number => s.length;
+const double = (n: number): number => n * 2;
+const f = flow(len, double);
+console.log(f("foobar")); // => 12
