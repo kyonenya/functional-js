@@ -15,19 +15,31 @@ pipe(
 );
 
 /**
- * SequenceT
- * @url https://dev.to/gnomff_65/fp-ts-sequencet-and-sweet-sweet-async-typed-fp-5aop
+ * Task
  */
-
-const logTask = (a: number): T.Task<void> => () => Promise.resolve(console.log(a));
-// Task(123)();
-
+const logTask = (a: number):T.Task<void> => () => {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve(console.log(a));
+    }, 500);
+  });
+};
 const tasks = [logTask(1), logTask(3), logTask(5)];
 const task = A.array.sequence(T.task)(tasks);
 // task();
 
+const seqTask = A.array.sequence(T.taskSeq)(tasks);
+// seqTask();
+
+/**
+ * SequenceT
+ * 可変長引数みたいなもん 受け取った引数を配列にしてくれる
+ * @url https://dev.to/gnomff_65/fp-ts-sequencet-and-sweet-sweet-async-typed-fp-5aop
+ */
+// 一挙実行 T.task
 const task2 = sequenceT(T.task)(logTask(2), logTask(4), logTask(6));
 // task2();
 
-const task3 = sequenceT(T.taskSeq)(logTask(2), logTask(4), logTask(6));
-task3();
+// 順次実行 T.taskSeq
+const seqTask2 = sequenceT(T.taskSeq)(logTask(2), logTask(4), logTask(6));
+// seqTask2();
