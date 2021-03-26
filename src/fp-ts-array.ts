@@ -20,14 +20,14 @@ async function fb(arr: Array<number>) {
   // Task<T>[] => Task<T[]> への変換
   const sleepTasks: T.Task<number>[] = arr.map((num) => sleepTask(100 * num));
   const sleepSeqTasks: T.Task<number[]> = A.array.sequence(T.task)(sleepTasks);
+  console.log(sleepSeqTasks);
 
   // ここでタスクの実行
   const numbers = await sleepSeqTasks();
   return numbers;
 }
 
-//fb([10, 30, 50]);
-
+fb([10, 30, 50]);
 
 /**
  * 実行する順番もsequentialにする
@@ -44,4 +44,4 @@ async function fc(arr: Array<number>) {
   return numbers;
 }
 
-fc([2, 4, 1]);
+// fc([2, 4, 1]);
