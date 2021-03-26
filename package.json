@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "tsc": "tsc -w",
-    "Task": "node dist/Task.js",
+    "fp-ts-array": "node dist/fp-ts-array.js",
     "action": "node dist/action.js"
   },
   "dependencies": {
