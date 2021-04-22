@@ -4,7 +4,7 @@
   "scripts": {
     "tsc": "tsc -w",
     "fp-ts-array": "node dist/fp-ts-array.js",
-    "action": "node dist/action.js"
+    "error": "node dist/error.js"
   },
   "dependencies": {
     "@types/node": "^14.14.20",

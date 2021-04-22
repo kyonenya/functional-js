@@ -34,6 +34,7 @@ const seqTask = A.array.sequence(T.taskSeq)(tasks);
 /**
  * SequenceT
  * 可変長引数みたいなもん 受け取った引数を配列にしてくれる
+ * 違う型でも許容される 例）E.Either<any, [number, string]>
  * @url https://dev.to/gnomff_65/fp-ts-sequencet-and-sweet-sweet-async-typed-fp-5aop
  */
 // 一挙実行 T.task
