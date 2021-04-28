@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "tsc": "tsc -w",
+    "ts-node": "ts-node src/ts-node.ts",
     "fp-ts-array": "node dist/fp-ts-array.js",
     "error": "node dist/error.js"
   },
@@ -15,6 +16,7 @@
     "winston": "^3.3.3"
   },
   "devDependencies": {
-    "@types/winston": "^2.4.4"
+    "@types/winston": "^2.4.4",
+    "ts-node": "^9.1.1"
   }
 }
